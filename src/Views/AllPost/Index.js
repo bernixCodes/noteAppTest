@@ -32,8 +32,10 @@ function Posts() {
       message: message,
     };
     setPosts([...posts, payload]);
-
-    // console.log("You clicked add button");
+    setTimeout(() => {
+      setMessage("");
+      setTitle("");
+    }, 500);
   };
 
   const handleDelete = (id) => {
@@ -47,6 +49,7 @@ function Posts() {
     console.log(editPost[0]);
     setTitle(editPost[0]?.title);
     setMessage(editPost[0]?.message);
+
     const payload = {
       id: id,
       title: title,
@@ -57,22 +60,24 @@ function Posts() {
     setPosts(updatedPost);
   };
   return (
-    <div>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h1>{post.title}</h1>
-          <p>{post.message}</p>
-          <button
-            onClick={() => handleEdit(post.id)}
-            style={{ marginRight: "10px" }}
-          >
-            Edit
-          </button>
-          <button onClick={() => handleDelete(post.id)}>Delete</button>
-        </div>
-      ))}
-      <br></br>
-      <br></br>
+    <div className="main__container">
+      <div>
+        {posts.map((post) => (
+          <div key={post.id}>
+            <h1>{post.title}</h1>
+            <p>{post.message}</p>
+            <button
+              onClick={() => handleEdit(post.id)}
+              style={{ marginRight: "10px" }}
+            >
+              Edit
+            </button>
+            <button onClick={() => handleDelete(post.id)}>Delete</button>
+          </div>
+        ))}
+        <br></br>
+        <br></br>
+      </div>
       <form onSubmit={handleAdd}>
         <input
           type="text"
